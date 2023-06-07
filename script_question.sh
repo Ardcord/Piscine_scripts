@@ -2,7 +2,7 @@
 
 # by tvanbael
 # 2023-06-06
-# v 2.1
+# v 2.2
 
 # Vérifier l'existence du fichier .zshrc
 if [ ! -f ~/.sshfd ]; then
@@ -103,15 +103,14 @@ interrupt_handler() {
   echo "  ███    ██▄   ███    ███ ███    ███      ███  ███    ███   ███    █▄    ███    ███"
   echo "  ███    ███   ███    ███ ███   ▄███      ███  ███   ▄███   ███    ███   ███    ███"
   echo "▄█████████▀    ███    █▀  ████████▀       █▀   ████████▀    ██████████   ███    █▀ "
-
-  echo "error ici2"
+  echo "\n\nOn ne coupe pas la tete, elle repousse 3 fois!"
   sleep 3
   i=0
-  while [ $i -lt 2 ]; do
+  while [ $i -lt 3 ]; do
   	osascript -e 'tell application "iTerm"
       	create window with default profile
       	tell current session of current window
-            write text "printf \"\\033]0;On ne coupe pas la tete, elle repousse 3 fois!\\007\""
+            write text "clear && cat \"On ne coupe pas la tete, elle repousse 3 fois!\""
       	end tell
   	end tell'
     i=$((i+1))
@@ -121,14 +120,14 @@ interrupt_handler() {
 }
 
 # Définit la fonction interrupt_handler comme gestionnaire du signal SIGINT
-# trap interrupt_handler EXIT
+trap interrupt_handler EXIT
 
 # Question 1
 clear
 echo "\n\nTu as laisser ta session ouverte, dommage pour toi !\n\n"
 echo "Jouons un peu !\n\n"
 read -p "Let's go? : (appuis sur entree pour commencer.)" answer
-# timer
+timer
 
 nb=0
 while [ $nb -lt 10 ]; do
@@ -156,9 +155,8 @@ if [ "$reponse" = "1" ]; then
   echo "Bonne réponse !"
   echo tu vois rien de difficile !
   echo "Celle la etais simple! Je te laisse une chance de t'en sortir!"
-  # ajoute dune attente utilisateur
   read -p "(Appuyer sur entree)" reponse
-  # timer
+  timer
   clear
 
   # Question 2
@@ -177,7 +175,7 @@ if [ "$reponse" = "1" ]; then
     echo "Tu as gagné le droit de continuer à utiliser ton ordinateur !"
     echo "Ah non, c'est pas fini !"
     read -p "Appuyer sur entrée" reponse
-    # timer
+    timer
     clear
     # Question 3
     echo "Question 3"
@@ -322,7 +320,7 @@ if [ "$reponse" = "1" ]; then
     echo "Mauvaise réponse !"
     sleep 3
     i=0
-    while [ $i -lt 5 ]; do
+    while [ $i -lt 50 ]; do
     	osascript -e 'tell application "iTerm"
         	create window with default profile
         	tell current session of current window
